@@ -24,8 +24,8 @@ export default defineSchema({
 
     comments : defineTable({
         content:v.string(),
-        rating:v.string(),
-        interviewerId : v.string(),
-        interviewId : v.string(),
+        interviewerId : v.id("users"),
+        interviewId : v.id("interviews"),
+        rating:v.number(),
     }).index("by_interview_id", ["interviewId"])
 })
