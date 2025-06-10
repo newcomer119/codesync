@@ -15,12 +15,12 @@ export const getMyInterviews = query({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) return [];
 
-    const interviews = await ctx.db
+    return await ctx.db
       .query("interviews")
       .withIndex("by_candidate_id", (q) =>
         q.eq("candidateId", identity.subject)
-      );
-    return interviews;
+      )
+      .collect();
   },
 });
 

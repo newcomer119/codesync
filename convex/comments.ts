@@ -2,6 +2,7 @@ import { error } from "console";
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { randomInt } from "crypto";
+import { Id } from "./_generated/dataModel";
 
 export const addComment = mutation({
   args: {
@@ -15,8 +16,8 @@ export const addComment = mutation({
     return await ctx.db.insert("comments", {
       interviewId: args.interviewId,
       content: args.content,
-      rating: args.rating.toString(),
-      interviewerId: identity.subject,
+      rating: args.rating,
+      interviewerId: identity.subject as Id<"users">,
     });
   },
 });
